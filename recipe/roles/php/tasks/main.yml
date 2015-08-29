@@ -1,0 +1,37 @@
+---
+- name: install epel repo
+  yum: name="http://ftp.riken.jp/Linux/fedora/epel/6/i386/epel-release-6-8.noarch.rpm"
+- name: Install remi yum repository
+  yum: name="http://rpms.famillecollet.com/enterprise/remi-release-6.rpm" 
+
+- name: php install
+  yum: name={{ item  }} state=present enablerepo=remi-php56
+  with_items:
+    - php
+    - php-cli
+    - php-pdo
+    - php-mbstring
+    - php-mcrypt
+    - php-devel
+    - php-common
+    - php-mysql
+    - php-pear
+    - php-pecl-xdebug
+    - php-opcache
+    - php-xml
+    - httpd
+
+- name: copy php.ini
+  copy: src=php.ini dest=/etc/php.ini
+  notify:
+    restart httpd
+
+- name: copy httpd.conf 
+  copy: src=httpd.conf dest=/etc/httpd/conf/httpd.conf 
+  notify:
+    restart httpd
+
+- name: httpd enabled
+  service: name=httpd state=started enabled=yes
+
+

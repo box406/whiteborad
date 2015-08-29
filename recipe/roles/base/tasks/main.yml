@@ -1,0 +1,7 @@
+---
+- name: install libselinux-python
+  yum: name="libselinux-python" state=latest
+- name: install git 
+  yum: name="vim"
+- name: install git
+  yum: name="git"

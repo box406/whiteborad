@@ -1,0 +1,8 @@
+.vagrant
+sandbox/vendor
+sandbox/*/config/development
+sandbox/*/logs/log-*.php
+sandbox/*/logs/!index.html
+sandbox/*/cache/*
+sandbox/*/cache/!index.html
+sandbox/*/cache/!.htaccess
